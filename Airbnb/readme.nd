@@ -1,0 +1,31 @@
+# Airbnb-pipeline (local Docker)
+
+## What this does
+- Spins up Postgres (container)
+- Runs init scripts (01_schemas.sql -> 02_tables.sql -> 03_indexes.sql)
+- Starts the pipeline app after Postgres is healthy
+- Pipeline loads CSVs into raw schema, runs curated + optimised transforms
+
+## How to run
+1. Copy your CSVs into `./data/` (or ensure they are available on host at `/mnt/data`)
+   - `RAW_HOST.csv`
+   - `RAW_LISTING.csv`
+   - `RAW_REVIEWS.csv`
+
+2. Start:
+```bash
+docker compose up --build
+
+
+
+---
+markdown
+## Quick checklist & tips
+- Copy your **actual CSVs** into the repository `./data/` folder (or keep them at `/mnt/data` — the app checks both paths).
+  - Your uploaded files were at `/mnt/data/RAW_REVIEWS.csv`, `/mnt/data/RAW_LISTING.csv`, `/mnt/data/RAW_HOST.csv` — the pipeline will find them if left there.
+- If you see `PostgreSQL Database directory appears to contain a database; Skipping initialization`, you must remove the volume to force the init files to be executed:
+  ```bash
+  docker compose down -v
+  docker volume ls
+  docker volume rm <your_volume_name>
+  docker compose up --build
