@@ -1,0 +1,10 @@
+API (Basketball Data)
+        ↓
+Python (Extract & Load)
+        ↓
+PostgreSQL (Raw + Analytics Tables)
+        ↓
+dbt (Transform & Model)
+        ↓
+Tableau (Dashboards)
+

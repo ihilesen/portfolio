@@ -1,0 +1,22 @@
+basketball-etl/
+│
+├── docker-compose.yml
+├── .env
+│
+├── extract/
+│   ├── extract_games.py
+│   └── requirements.txt
+│
+├── dbt/
+│   ├── dbt_project.yml
+│   └── models/
+│       ├── staging/
+│       │   └── stg_games.sql
+│       └── marts/
+│           └── fact_games.sql
+│
+├── airflow/
+│   └── dags/
+│       └── basketball_etl_dag.py
+│
+└── README.md
